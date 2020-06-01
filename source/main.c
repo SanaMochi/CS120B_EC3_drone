@@ -144,9 +144,9 @@ int TickFct_Camera(int state) {
 			else state = c_off;
 			break;
 		case c_wait:
-			if ((A67 & 0x01) && cnt <= 100) state = c_wait;
-			else if (!(A67 & 0x01) && cnt <= 100) state = pic;
-			else if ((A67 & 0x01) && cnt > 100) state = vid_w;
+			if ((A67 & 0x02) && cnt <= 100) state = pic;
+			else if (!(A67 & 0x02) && cnt <= 100) state = c_wait;
+			else if ((A67 & 0x02) && cnt > 100) state = vid_w;
 			else state = vid;
 			break;
 		case pic:
@@ -154,15 +154,15 @@ int TickFct_Camera(int state) {
 			else state = c_off_w;
 			break;
 		case vid_w:
-			if (A67 & 0x01) state = vid_w;
+			if (A67 & 0x02) state = vid_w;
 			else state = vid;
 			break;
 		case vid:
-			if (A67 & 0x01) state = c_off_w;
+			if (A67 & 0x02) state = c_off_w;
 			else state = vid;
 			break;
 		case c_off_w:
-			if (A67 & 0x01) state = c_off_w;
+			if (A67 & 0x02) state = c_off_w;
 			else state = c_off;
 			break;
 		default:
